@@ -8,7 +8,9 @@ from .api_views import (
     create_reservation,
     my_reservations,
     upload_payment_receipt,
-    reservation_detail
+    reservation_detail,
+    user_profile,
+    ai_assistant,
     
 )
 
@@ -80,5 +82,16 @@ urlpatterns = [
         upload_payment_receipt,
         name="upload_payment_receipt"
     ),
-
+    # User Profile
+    path(
+        "profile/",
+        user_profile,
+        name="user_profile"
+    ),
+    #AI Asistance
+    path(
+    "ai-assistant/",
+    ai_assistant,
+    name="ai_assistant"
+    ),
 ]

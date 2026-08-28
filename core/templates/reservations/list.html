@@ -1,26 +1,50 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Reservations | Reservation System
+{% endblock %}
+
+{% block page_title %}
+    Reservations
+{% endblock %}
+
+{% block page_subtitle %}
+    Manage customer bookings and reservation status
+{% endblock %}
+
 {% block content %}
 
 <style>
 
-/* ==========================================
+/* =========================================================
    RESERVATION PAGE
-========================================== */
+========================================================= */
 
 .reservation-page {
     width: 100%;
+    max-width: 100%;
+
+    /*
+       Extra spacing from the sidebar.
+       Base.html already provides content padding,
+       so this gives the reservation page additional breathing room.
+    */
+    padding-left: 20px;
+    padding-right: 20px;
+
+    margin: 0 auto;
 }
 
 
-/* ==========================================
+/* =========================================================
    PAGE HEADER
-========================================== */
+========================================================= */
 
 .reservation-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+
     margin-bottom: 25px;
 }
 
@@ -37,28 +61,37 @@
 }
 
 
-/* ==========================================
+/* =========================================================
    SUMMARY CARDS
-========================================== */
+========================================================= */
 
 .reservation-summary {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
     gap: 18px;
+
     margin-bottom: 22px;
 }
 
 .reservation-summary-card {
     background: var(--white);
+
     border: 1px solid var(--border);
+
     border-radius: 12px;
+
     padding: 18px 20px;
+
+    min-width: 0;
 }
 
 .summary-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-bottom: 12px;
 }
 
@@ -71,6 +104,9 @@
 .summary-icon {
     width: 34px;
     height: 34px;
+
+    flex-shrink: 0;
+
     border-radius: 8px;
 
     display: flex;
@@ -80,22 +116,22 @@
     font-size: 15px;
 }
 
-.blue {
+.summary-icon.blue {
     background: #eff6ff;
     color: #2563eb;
 }
 
-.green {
+.summary-icon.green {
     background: #f0fdf4;
     color: #16a34a;
 }
 
-.orange {
+.summary-icon.orange {
     background: #fff7ed;
     color: #ea580c;
 }
 
-.purple {
+.summary-icon.purple {
     background: #faf5ff;
     color: #9333ea;
 }
@@ -104,25 +140,31 @@
     font-size: 25px;
     font-weight: 700;
     color: var(--text);
+
+    line-height: 1.2;
 }
 
 .summary-description {
     font-size: 11px;
     color: var(--muted);
+
     margin-top: 4px;
 }
 
 
-/* ==========================================
+/* =========================================================
    FILTER TOOLBAR
-========================================== */
+========================================================= */
 
 .reservation-toolbar {
     background: var(--white);
+
     border: 1px solid var(--border);
+
     border-radius: 12px;
 
     padding: 15px 18px;
+
     margin-bottom: 18px;
 
     display: flex;
@@ -139,18 +181,24 @@
 
 .reservation-toolbar-count {
     color: var(--muted);
+
     font-size: 11px;
+
     margin-top: 3px;
 }
 
 .reservation-filters {
     display: flex;
     align-items: center;
+
     gap: 7px;
+
+    flex-wrap: wrap;
 }
 
 .reservation-filter {
     border: 1px solid var(--border);
+
     background: white;
 
     color: var(--muted);
@@ -164,30 +212,37 @@
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: all 0.2s ease;
 }
 
 .reservation-filter:hover {
     border-color: #bfdbfe;
+
     color: var(--primary);
+
     background: #f8fbff;
 }
 
 .reservation-filter.active {
     background: var(--primary);
+
     border-color: var(--primary);
+
     color: white;
 }
 
 
-/* ==========================================
+/* =========================================================
    TABLE CARD
-========================================== */
+========================================================= */
 
 .reservation-table-card {
     background: var(--white);
+
     border: 1px solid var(--border);
+
     border-radius: 12px;
+
     overflow: hidden;
 }
 
@@ -199,6 +254,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    gap: 15px;
 }
 
 .reservation-table-title {
@@ -212,33 +269,72 @@
 }
 
 
-/* ==========================================
+/* =========================================================
    TABLE
-========================================== */
+========================================================= */
 
 .reservation-table-wrapper {
+    width: 100%;
+
     overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 .reservation-table {
     width: 100%;
-    min-width: 1100px;
+
+    min-width: 1050px;
+
     border-collapse: collapse;
 }
 
 .reservation-table th {
     white-space: nowrap;
+
+    text-align: left;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    font-weight: 600;
+
+    padding: 12px 20px;
+
+    background: #f8fafc;
+
+    border-bottom: 1px solid var(--border);
 }
 
 .reservation-table td {
     vertical-align: middle;
+
     white-space: nowrap;
+
+    padding: 14px 20px;
+
+    font-size: 12px;
+
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.reservation-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.reservation-table tbody tr:hover {
+    background: #fafcff;
+}
+
+.reservation-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 
-/* ==========================================
+/* =========================================================
    ID
-========================================== */
+========================================================= */
 
 .reservation-id {
     font-weight: 600;
@@ -246,13 +342,14 @@
 }
 
 
-/* ==========================================
+/* =========================================================
    CUSTOMER
-========================================== */
+========================================================= */
 
 .customer {
     display: flex;
     align-items: center;
+
     gap: 10px;
 }
 
@@ -282,14 +379,21 @@
 
 .customer-email {
     color: var(--muted);
+
     font-size: 10px;
+
     margin-top: 2px;
+
+    max-width: 180px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
-/* ==========================================
+/* =========================================================
    ROOM
-========================================== */
+========================================================= */
 
 .room-name {
     font-size: 12px;
@@ -298,17 +402,20 @@
 
 .room-type {
     color: var(--muted);
+
     font-size: 10px;
+
     margin-top: 2px;
 }
 
 
-/* ==========================================
+/* =========================================================
    DATES
-========================================== */
+========================================================= */
 
 .date-label {
     font-size: 9px;
+
     color: var(--muted);
 
     text-transform: uppercase;
@@ -322,9 +429,9 @@
 }
 
 
-/* ==========================================
+/* =========================================================
    GUESTS
-========================================== */
+========================================================= */
 
 .guest-main {
     font-size: 12px;
@@ -333,29 +440,34 @@
 
 .guest-sub {
     font-size: 10px;
+
     color: var(--muted);
+
     margin-top: 2px;
 }
 
 
-/* ==========================================
+/* =========================================================
    PRICE
-========================================== */
+========================================================= */
 
 .price {
     font-size: 13px;
     font-weight: 700;
+
+    white-space: nowrap;
 }
 
 
-/* ==========================================
+/* =========================================================
    STATUS
-========================================== */
+========================================================= */
 
 .reservation-status {
     display: inline-flex;
 
     align-items: center;
+
     gap: 6px;
 
     padding: 5px 9px;
@@ -363,12 +475,17 @@
     border-radius: 20px;
 
     font-size: 10px;
+
     font-weight: 600;
+
+    white-space: nowrap;
 }
 
 .status-dot {
     width: 6px;
     height: 6px;
+
+    flex-shrink: 0;
 
     border-radius: 50%;
 }
@@ -422,13 +539,15 @@
 }
 
 
-/* ==========================================
+/* =========================================================
    ACTIONS
-========================================== */
+========================================================= */
 
 .reservation-actions {
     display: flex;
+
     align-items: center;
+
     gap: 6px;
 }
 
@@ -446,11 +565,15 @@
     min-height: 28px;
 
     border: 1px solid transparent;
+
     border-radius: 6px;
 
     padding: 6px 9px;
 
+    font-family: inherit;
+
     font-size: 10px;
+
     font-weight: 600;
 
     cursor: pointer;
@@ -458,34 +581,33 @@
     transition: all 0.2s ease;
 
     white-space: nowrap;
-}
-
-
-/* ==========================================
-   VIEW
-========================================== */
-
-.reservation-view {
-    background: #eff6ff;
-    color: #2563eb;
-
-    border-color: #dbeafe;
 
     text-decoration: none;
 }
 
+
+/* VIEW */
+
+.reservation-view {
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border-color: #dbeafe;
+}
+
 .reservation-view:hover {
     background: #dbeafe;
+
     color: #1d4ed8;
 }
 
 
-/* ==========================================
-   CONFIRM
-========================================== */
+/* CONFIRM */
 
 .reservation-confirm {
     background: #f0fdf4;
+
     color: #15803d;
 
     border-color: #bbf7d0;
@@ -496,12 +618,11 @@
 }
 
 
-/* ==========================================
-   CANCEL
-========================================== */
+/* CANCEL */
 
 .reservation-cancel {
     background: #fef2f2;
+
     color: #b91c1c;
 
     border-color: #fecaca;
@@ -512,9 +633,9 @@
 }
 
 
-/* ==========================================
+/* =========================================================
    EMPTY STATE
-========================================== */
+========================================================= */
 
 .reservation-empty {
     text-align: center;
@@ -531,6 +652,7 @@
     border-radius: 10px;
 
     background: #f1f5f9;
+
     color: #94a3b8;
 
     display: flex;
@@ -542,450 +664,517 @@
 
 .reservation-empty-title {
     font-size: 13px;
+
     font-weight: 600;
+
     color: var(--text);
 }
 
 .reservation-empty-text {
     font-size: 11px;
+
     color: var(--muted);
 
     margin-top: 4px;
 }
 
 
-/* ==========================================
-   RESPONSIVE
-========================================== */
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1100px) {
 
     .reservation-summary {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
 }
 
 
-@media (max-width: 700px) {
+/* =========================================================
+   MOBILE
+========================================================= */
 
-    .reservation-summary {
-        grid-template-columns: 1fr;
+@media (max-width: 768px) {
+
+    .reservation-page {
+        /*
+           Remove the desktop sidebar spacing on mobile.
+           Base.html already provides mobile content padding.
+        */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .reservation-header {
+        margin-bottom: 20px;
+    }
+
+    .reservation-header h2 {
+        font-size: 20px;
+    }
+
+    .reservation-header p {
+        font-size: 12px;
     }
 
     .reservation-toolbar {
-        flex-direction: column;
         align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 15px;
     }
 
     .reservation-filters {
         width: 100%;
+
         overflow-x: auto;
+
+        flex-wrap: nowrap;
+
+        padding-bottom: 2px;
+    }
+
+    .reservation-filter {
+        flex-shrink: 0;
+    }
+
+    .reservation-table-header {
+        padding: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .reservation-summary {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .reservation-summary-card {
+        padding: 16px;
+    }
+
+    .reservation-table-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
     }
 
 }
 
 </style>
 
+
 <div class="reservation-page">
 
 
-<!-- ==========================================
-     PAGE HEADER
-========================================== -->
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
 
-<div class="reservation-header">
+    <div class="reservation-header">
 
-    <div>
+        <div>
 
-        <h2>
-            Reservations
-        </h2>
+            <h2>
+                Reservations
+            </h2>
 
-        <p>
-            Manage customer bookings and reservation status.
-        </p>
+            <p>
+                Manage customer bookings and reservation status.
+            </p>
+
+        </div>
 
     </div>
 
-</div>
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <div class="reservation-summary">
 
 
-<!-- ==========================================
-     SUMMARY CARDS
-========================================== -->
+        <!-- TOTAL -->
 
-<div class="reservation-summary">
+        <div class="reservation-summary-card">
 
+            <div class="summary-top">
 
-    <!-- TOTAL -->
+                <span class="summary-label">
+                    Total Reservations
+                </span>
 
-    <div class="reservation-summary-card">
+                <div class="summary-icon blue">
+                    ▣
+                </div>
 
-        <div class="summary-top">
+            </div>
 
-            <span class="summary-label">
-                Total Reservations
-            </span>
+            <div class="summary-number">
+                {{ reservations|length }}
+            </div>
 
-            <div class="summary-icon blue">
-                ▣
+            <div class="summary-description">
+                All customer bookings
             </div>
 
         </div>
 
-        <div class="summary-number">
-            {{ reservations|length }}
+
+        <!-- PENDING -->
+
+        <div class="reservation-summary-card">
+
+            <div class="summary-top">
+
+                <span class="summary-label">
+                    Pending
+                </span>
+
+                <div class="summary-icon orange">
+                    ◷
+                </div>
+
+            </div>
+
+            <div class="summary-number">
+                {{ pending_count }}
+            </div>
+
+            <div class="summary-description">
+                Waiting for approval
+            </div>
+
         </div>
 
-        <div class="summary-description">
-            All customer bookings
+
+        <!-- CONFIRMED -->
+
+        <div class="reservation-summary-card">
+
+            <div class="summary-top">
+
+                <span class="summary-label">
+                    Confirmed
+                </span>
+
+                <div class="summary-icon green">
+                    ✓
+                </div>
+
+            </div>
+
+            <div class="summary-number">
+                {{ confirmed_count }}
+            </div>
+
+            <div class="summary-description">
+                Approved reservations
+            </div>
+
+        </div>
+
+
+        <!-- CANCELLED -->
+
+        <div class="reservation-summary-card">
+
+            <div class="summary-top">
+
+                <span class="summary-label">
+                    Cancelled
+                </span>
+
+                <div class="summary-icon purple">
+                    ×
+                </div>
+
+            </div>
+
+            <div class="summary-number">
+                {{ cancelled_count }}
+            </div>
+
+            <div class="summary-description">
+                Cancelled bookings
+            </div>
+
         </div>
 
     </div>
 
 
-    <!-- PENDING -->
+    <!-- =====================================================
+         FILTER TOOLBAR
+    ====================================================== -->
 
-    <div class="reservation-summary-card">
+    <div class="reservation-toolbar">
 
-        <div class="summary-top">
+        <div>
 
-            <span class="summary-label">
+            <div class="reservation-toolbar-title">
+                Reservation Management
+            </div>
+
+            <div class="reservation-toolbar-count">
+                Review and manage customer bookings
+            </div>
+
+        </div>
+
+
+        <div class="reservation-filters">
+
+            <button
+                type="button"
+                class="reservation-filter active"
+                data-filter="ALL">
+                All
+            </button>
+
+            <button
+                type="button"
+                class="reservation-filter"
+                data-filter="PENDING">
                 Pending
-            </span>
+            </button>
 
-            <div class="summary-icon orange">
-                ◷
-            </div>
-
-        </div>
-
-        <div class="summary-number">
-            {{ pending_count }}
-        </div>
-
-        <div class="summary-description">
-            Waiting for approval
-        </div>
-
-    </div>
-
-
-    <!-- CONFIRMED -->
-
-    <div class="reservation-summary-card">
-
-        <div class="summary-top">
-
-            <span class="summary-label">
+            <button
+                type="button"
+                class="reservation-filter"
+                data-filter="CONFIRMED">
                 Confirmed
-            </span>
+            </button>
 
-            <div class="summary-icon green">
-                ✓
-            </div>
-
-        </div>
-
-        <div class="summary-number">
-            {{ confirmed_count }}
-        </div>
-
-        <div class="summary-description">
-            Approved reservations
-        </div>
-
-    </div>
-
-
-    <!-- CANCELLED -->
-
-    <div class="reservation-summary-card">
-
-        <div class="summary-top">
-
-            <span class="summary-label">
+            <button
+                type="button"
+                class="reservation-filter"
+                data-filter="CANCELLED">
                 Cancelled
-            </span>
+            </button>
 
-            <div class="summary-icon purple">
-                ×
+            <button
+                type="button"
+                class="reservation-filter"
+                data-filter="COMPLETED">
+                Completed
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TABLE CARD
+    ====================================================== -->
+
+    <div class="reservation-table-card">
+
+
+        <div class="reservation-table-header">
+
+            <div class="reservation-table-title">
+                All Reservations
+            </div>
+
+            <div class="reservation-table-count">
+
+                <span id="visibleReservationCount">
+                    {{ reservations|length }}
+                </span>
+
+                reservation{{ reservations|length|pluralize }}
+
             </div>
 
         </div>
 
-        <div class="summary-number">
-            {{ cancelled_count }}
-        </div>
 
-        <div class="summary-description">
-            Cancelled bookings
-        </div>
+        <!-- =================================================
+             TABLE
+        ================================================== -->
 
-    </div>
+        <div class="reservation-table-wrapper">
 
-</div>
+            <table class="reservation-table">
 
+                <thead>
 
-<!-- ==========================================
-     FILTER TOOLBAR
-========================================== -->
+                    <tr>
 
-<div class="reservation-toolbar">
+                        <th>
+                            ID
+                        </th>
 
-    <div>
+                        <th>
+                            Customer
+                        </th>
 
-        <div class="reservation-toolbar-title">
-            Reservation Management
-        </div>
+                        <th>
+                            Room / Cottage
+                        </th>
 
-        <div class="reservation-toolbar-count">
-            Review and manage customer bookings
-        </div>
+                        <th>
+                            Check-in
+                        </th>
 
-    </div>
+                        <th>
+                            Check-out
+                        </th>
 
+                        <th>
+                            Guests
+                        </th>
 
-    <div class="reservation-filters">
+                        <th>
+                            Total
+                        </th>
 
-        <button
-            type="button"
-            class="reservation-filter active"
-        >
-            All
-        </button>
+                        <th>
+                            Status
+                        </th>
 
-        <button
-            type="button"
-            class="reservation-filter"
-        >
-            Pending
-        </button>
+                        <th>
+                            Actions
+                        </th>
 
-        <button
-            type="button"
-            class="reservation-filter"
-        >
-            Confirmed
-        </button>
+                    </tr>
 
-        <button
-            type="button"
-            class="reservation-filter"
-        >
-            Cancelled
-        </button>
+                </thead>
 
-    </div>
 
-</div>
+                <tbody id="reservationTableBody">
 
+                    {% for reservation in reservations %}
 
-<!-- ==========================================
-     RESERVATION TABLE
-========================================== -->
+                    <tr
+                        class="reservation-row"
+                        data-status="{{ reservation.status|upper }}"
+                    >
 
-<div class="reservation-table-card">
 
+                        <!-- ID -->
 
-    <!-- TABLE HEADER -->
+                        <td>
 
-    <div class="reservation-table-header">
+                            <span class="reservation-id">
+                                #{{ reservation.id }}
+                            </span>
 
-        <div class="reservation-table-title">
-            All Reservations
-        </div>
+                        </td>
 
-        <div class="reservation-table-count">
 
-            {{ reservations|length }}
-            reservation{{ reservations|length|pluralize }}
+                        <!-- CUSTOMER -->
 
-        </div>
+                        <td>
 
-    </div>
+                            <div class="customer">
 
+                                <div class="customer-avatar">
 
-    <!-- TABLE -->
+                                    {% if reservation.customer.username %}
 
-    <div class="reservation-table-wrapper">
+                                        {{ reservation.customer.username|first|upper }}
 
-        <table class="reservation-table">
+                                    {% else %}
 
-            <thead>
+                                        ?
 
-                <tr>
-
-                    <th>
-                        ID
-                    </th>
-
-                    <th>
-                        Customer
-                    </th>
-
-                    <th>
-                        Room / Cottage
-                    </th>
-
-                    <th>
-                        Check-in
-                    </th>
-
-                    <th>
-                        Check-out
-                    </th>
-
-                    <th>
-                        Guests
-                    </th>
-
-                    <th>
-                        Total
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Actions
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                {% for reservation in reservations %}
-
-                <tr>
-
-
-                    <!-- ==================================
-                         ID
-                    =================================== -->
-
-                    <td>
-
-                        <span class="reservation-id">
-                            #{{ reservation.id }}
-                        </span>
-
-                    </td>
-
-
-                    <!-- ==================================
-                         CUSTOMER
-                    =================================== -->
-
-                    <td>
-
-                        <div class="customer">
-
-                            <div class="customer-avatar">
-
-                                {{ reservation.customer.username|first|upper }}
-
-                            </div>
-
-                            <div>
-
-                                <div class="customer-name">
-
-                                    {{ reservation.customer.username }}
+                                    {% endif %}
 
                                 </div>
 
-                                <div class="customer-email">
 
-                                    {{ reservation.customer.email }}
+                                <div>
+
+                                    <div class="customer-name">
+                                        {{ reservation.customer.username }}
+                                    </div>
+
+                                    <div class="customer-email">
+                                        {{ reservation.customer.email }}
+                                    </div>
 
                                 </div>
 
                             </div>
 
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <!-- ==================================
-                         ROOM
-                    =================================== -->
+                        <!-- ROOM -->
 
-                    <td>
+                        <td>
 
-                        <div class="room-name">
+                            <div class="room-name">
+                                {{ reservation.room.name }}
+                            </div>
 
-                            {{ reservation.room.name }}
+                            <div class="room-type">
+                                {{ reservation.room.type }}
+                            </div>
 
-                        </div>
-
-                        <div class="room-type">
-
-                            {{ reservation.room.type }}
-
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <!-- ==================================
-                         CHECK-IN
-                    =================================== -->
+                        <!-- CHECK-IN -->
 
-                    <td>
+                        <td>
 
-                        <div class="date-label">
-                            CHECK-IN
-                        </div>
+                            <div class="date-label">
+                                Check-in
+                            </div>
 
-                        <div class="date-main">
+                            <div class="date-main">
+                                {{ reservation.check_in|date:"M d, Y" }}
+                            </div>
 
-                            {{ reservation.check_in|date:"M d, Y" }}
-
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <!-- ==================================
-                         CHECK-OUT
-                    =================================== -->
+                        <!-- CHECK-OUT -->
 
-                    <td>
+                        <td>
 
-                        <div class="date-label">
-                            CHECK-OUT
-                        </div>
+                            <div class="date-label">
+                                Check-out
+                            </div>
 
-                        <div class="date-main">
+                            <div class="date-main">
+                                {{ reservation.check_out|date:"M d, Y" }}
+                            </div>
 
-                            {{ reservation.check_out|date:"M d, Y" }}
-
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <!-- ==================================
-                         GUESTS
-                    =================================== -->
+                        <!-- GUESTS -->
 
-                    <td>
+                        <td>
 
-                        <div class="guest-main">
+                            <div class="guest-main">
 
-                            {{ reservation.adults }}
-                            adult{{ reservation.adults|pluralize }}
+                                {{ reservation.adults }}
+                                adult{{ reservation.adults|pluralize }}
 
-                        </div>
+                            </div>
 
-                        {% if reservation.children > 0 %}
+
+                            {% if reservation.children > 0 %}
 
                             <div class="guest-sub">
 
@@ -994,200 +1183,276 @@
 
                             </div>
 
-                        {% endif %}
+                            {% endif %}
 
-                    </td>
-
-
-                    <!-- ==================================
-                         TOTAL
-                    =================================== -->
-
-                    <td>
-
-                        <span class="price">
-
-                            ₱{{ reservation.total_amount }}
-
-                        </span>
-
-                    </td>
+                        </td>
 
 
-                    <!-- ==================================
-                         STATUS
-                    =================================== -->
+                        <!-- TOTAL -->
 
-                    <td>
+                        <td>
 
-
-                        {% if reservation.status == "PENDING" %}
-
-                            <span class="reservation-status pending">
-
-                                <span class="status-dot"></span>
-
-                                Pending
-
+                            <span class="price">
+                                ₱{{ reservation.total_amount }}
                             </span>
 
-
-                        {% elif reservation.status == "CONFIRMED" %}
-
-                            <span class="reservation-status confirmed">
-
-                                <span class="status-dot"></span>
-
-                                Confirmed
-
-                            </span>
+                        </td>
 
 
-                        {% elif reservation.status == "CANCELLED" %}
+                        <!-- STATUS -->
 
-                            <span class="reservation-status cancelled">
+                        <td>
 
-                                <span class="status-dot"></span>
+                            {% if reservation.status|upper == "PENDING" %}
 
-                                Cancelled
+                                <span class="reservation-status pending">
 
-                            </span>
+                                    <span class="status-dot"></span>
 
+                                    Pending
 
-                        {% elif reservation.status == "COMPLETED" %}
-
-                            <span class="reservation-status completed">
-
-                                <span class="status-dot"></span>
-
-                                Completed
-
-                            </span>
-
-                        {% endif %}
+                                </span>
 
 
-                    </td>
+                            {% elif reservation.status|upper == "CONFIRMED" %}
+
+                                <span class="reservation-status confirmed">
+
+                                    <span class="status-dot"></span>
+
+                                    Confirmed
+
+                                </span>
 
 
-                    <!-- ==================================
-                         ACTIONS
-                    =================================== -->
+                            {% elif reservation.status|upper == "CANCELLED" %}
 
-                    <td>
+                                <span class="reservation-status cancelled">
 
-                        <div class="reservation-actions">
+                                    <span class="status-dot"></span>
 
+                                    Cancelled
 
-                            <!-- VIEW -->
-
-                            <a
-                                href="{% url 'reservation_detail' reservation.id %}"
-                                class="reservation-action reservation-view"
-                            >
-                                View
-                            </a>
+                                </span>
 
 
-                            {% if reservation.status == "PENDING" %}
+                            {% elif reservation.status|upper == "COMPLETED" %}
 
+                                <span class="reservation-status completed">
 
-                                <!-- CONFIRM -->
+                                    <span class="status-dot"></span>
 
-                                <form
-                                    method="POST"
-                                    action="{% url 'confirm_reservation' reservation.id %}"
-                                >
+                                    Completed
 
-                                    {% csrf_token %}
+                                </span>
 
-                                    <button
-                                        type="submit"
-                                        class="reservation-action reservation-confirm"
-                                    >
-                                        ✓ Confirm
-                                    </button>
+                            {% else %}
 
-                                </form>
+                                <span class="reservation-status pending">
 
+                                    <span class="status-dot"></span>
 
-                                <!-- CANCEL -->
+                                    {{ reservation.status|title }}
 
-                                <form
-                                    method="POST"
-                                    action="{% url 'cancel_reservation' reservation.id %}"
-                                >
-
-                                    {% csrf_token %}
-
-                                    <button
-                                        type="submit"
-                                        class="reservation-action reservation-cancel"
-                                    >
-                                        × Cancel
-                                    </button>
-
-                                </form>
-
+                                </span>
 
                             {% endif %}
 
-
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                </tr>
+                        <!-- ACTIONS -->
+
+                        <td>
+
+                            <div class="reservation-actions">
 
 
-                {% empty %}
+                                <!-- VIEW -->
+
+                                <a
+                                    href="{% url 'reservation_detail' reservation.id %}"
+                                    class="reservation-action reservation-view"
+                                >
+                                    View
+                                </a>
 
 
-                <!-- ==================================
-                     EMPTY STATE
-                =================================== -->
+                                {% if reservation.status|upper == "PENDING" %}
 
-                <tr>
 
-                    <td colspan="9">
+                                    <!-- CONFIRM -->
 
-                        <div class="reservation-empty">
+                                    <form
+                                        method="POST"
+                                        action="{% url 'confirm_reservation' reservation.id %}"
+                                    >
 
-                            <div class="reservation-empty-icon">
-                                ▣
+                                        {% csrf_token %}
+
+                                        <button
+                                            type="submit"
+                                            class="reservation-action reservation-confirm"
+                                        >
+                                            ✓ Confirm
+                                        </button>
+
+                                    </form>
+
+
+                                    <!-- CANCEL -->
+
+                                    <form
+                                        method="POST"
+                                        action="{% url 'cancel_reservation' reservation.id %}"
+                                    >
+
+                                        {% csrf_token %}
+
+                                        <button
+                                            type="submit"
+                                            class="reservation-action reservation-cancel"
+                                        >
+                                            × Cancel
+                                        </button>
+
+                                    </form>
+
+
+                                {% endif %}
+
                             </div>
 
-                            <div class="reservation-empty-title">
+                        </td>
 
-                                No reservations found
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="9">
+
+                            <div class="reservation-empty">
+
+                                <div class="reservation-empty-icon">
+                                    ▣
+                                </div>
+
+                                <div class="reservation-empty-title">
+                                    No reservations found
+                                </div>
+
+                                <div class="reservation-empty-text">
+                                    Customer reservations will appear here.
+                                </div>
 
                             </div>
 
-                            <div class="reservation-empty-text">
+                        </td>
 
-                                Customer reservations will appear here.
+                    </tr>
 
-                            </div>
+                    {% endfor %}
 
-                        </div>
+                </tbody>
 
-                    </td>
+            </table>
 
-                </tr>
-
-
-                {% endfor %}
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
 </div>
 
 
-</div>
+<!-- =========================================================
+     FILTER JAVASCRIPT
+========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const filterButtons =
+        document.querySelectorAll(".reservation-filter");
+
+    const rows =
+        document.querySelectorAll(".reservation-row");
+
+    const countElement =
+        document.getElementById("visibleReservationCount");
+
+
+    filterButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const filter =
+                this.dataset.filter;
+
+
+            /* ---------------------------------------------
+               ACTIVE FILTER
+            --------------------------------------------- */
+
+            filterButtons.forEach(function (item) {
+
+                item.classList.remove("active");
+
+            });
+
+            this.classList.add("active");
+
+
+            /* ---------------------------------------------
+               FILTER TABLE
+            --------------------------------------------- */
+
+            let visibleCount = 0;
+
+
+            rows.forEach(function (row) {
+
+                const status =
+                    row.dataset.status;
+
+
+                if (
+                    filter === "ALL" ||
+                    status === filter
+                ) {
+
+                    row.style.display = "";
+
+                    visibleCount++;
+
+                } else {
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+
+            /* ---------------------------------------------
+               UPDATE COUNT
+            --------------------------------------------- */
+
+            if (countElement) {
+
+                countElement.textContent =
+                    visibleCount;
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 
 {% endblock %}

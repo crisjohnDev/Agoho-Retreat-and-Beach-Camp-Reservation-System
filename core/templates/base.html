@@ -610,46 +610,56 @@
 
         <nav class="nav">
 
-            <a href="{% url 'dashboard' %}" class="active">
+            <a href="{% url 'dashboard' %}"
+            class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                 <div class="nav-icon">⌂</div>
                 <span>Dashboard</span>
             </a>
 
-            <a href="{% url 'reservation_list' %}">
+            <a href="{% url 'reservation_list' %}"
+            class="{% if request.resolver_match.url_name == 'reservation_list' %}active{% endif %}">
                 <div class="nav-icon">▣</div>
                 <span>Reservations</span>
             </a>
 
-            <a href="{% url 'rooms' %}">
+            <a href="{% url 'rooms' %}"
+            class="{% if request.resolver_match.url_name == 'rooms' %}active{% endif %}">
                 <div class="nav-icon">▤</div>
                 <span>Rooms & Cottage</span>
             </a>
 
-            <a href="{% url 'availability' %}">
+            <a href="{% url 'availability' %}"
+            class="{% if request.resolver_match.url_name == 'availability' %}active{% endif %}">
                 <div class="nav-icon">◷</div>
                 <span>Availability</span>
             </a>
 
-            <a href="{% url 'payment_list' %}">
+            <a href="{% url 'payment_list' %}"
+            class="{% if request.resolver_match.url_name == 'payment_list' %}active{% endif %}">
                 <div class="nav-icon">₱</div>
                 <span>Payments</span>
             </a>
+
 
             <div class="nav-title">
                 Management
             </div>
 
-            <a href="{% url 'customer_list' %}">
+
+            <a href="{% url 'customer_list' %}"
+            class="{% if request.resolver_match.url_name == 'customer_list' %}active{% endif %}">
                 <div class="nav-icon">♙</div>
                 <span>Customers</span>
             </a>
 
-            <a href="{% url 'mapping' %}">
+            <a href="{% url 'mapping' %}"
+            class="{% if request.resolver_match.url_name == 'mapping' %}active{% endif %}">
                 <div class="nav-icon">⌖</div>
                 <span>Mapping</span>
             </a>
 
-            <a href="{% url 'reports' %}">
+            <a href="{% url 'reports' %}"
+            class="{% if request.resolver_match.url_name == 'reports' %}active{% endif %}">
                 <div class="nav-icon">▥</div>
                 <span>Reports</span>
             </a>

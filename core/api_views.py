@@ -10,6 +10,11 @@ from datetime import date
 from django.db.models import Q
 from .models import Room, Reservation
 
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+from .ai_assistant import generate_ai_response
+
 @api_view(["POST"])
 def customer_register(request):
 
@@ -901,4 +906,88 @@ def reservation_detail(request, reservation_id):
             }
         },
         status=200
+    )
+
+
+@api_view(["GET"])
+def user_profile(request):
+
+    if not request.user.is_authenticated:
+
+        return Response(
+            {
+                "success": False,
+                "message": "You must be logged in."
+            },
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+
+    user = request.user
+
+    return Response(
+        {
+            "success": True,
+            "user": {
+                "username": user.username,
+                "email": user.email,
+                "date_joined": user.date_joined,
+            }
+        },
+        status=status.HTTP_200_OK
+    )
+
+
+@api_view(["POST"])
+def ai_assistant(request):
+
+    # ==========================================
+    # CHECK LOGIN
+    # ==========================================
+
+    if not request.user.is_authenticated:
+
+        return Response(
+            {
+                "success": False,
+                "message": "You must be logged in."
+            },
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+
+    # ==========================================
+    # GET MESSAGE
+    # ==========================================
+
+    message = request.data.get("message", "").strip()
+
+    if not message:
+
+        return Response(
+            {
+                "success": False,
+                "message": "Message is required."
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # ==========================================
+    # GENERATE RESPONSE
+    # ==========================================
+
+    answer = generate_ai_response(
+        request.user,
+        message
+    )
+
+    # ==========================================
+    # RESPONSE
+    # ==========================================
+
+    return Response(
+        {
+            "success": True,
+            "message": message,
+            "response": answer,
+        },
+        status=status.HTTP_200_OK
     )
