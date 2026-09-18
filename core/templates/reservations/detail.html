@@ -5,12 +5,14 @@
 <style>
 
 /* =========================================================
-   RESERVATION DETAIL
+   PAGE
 ========================================================= */
 
 .reservation-detail-page {
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 5px 0 30px;
 }
 
 
@@ -33,26 +35,35 @@
 }
 
 .back-button {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--border);
-    background: var(--white);
-    color: var(--text);
-    border-radius: 9px;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    text-decoration: none;
-    font-size: 20px;
+    background: #2563eb;
+    color: #ffffff;
 
-    transition: 0.2s;
+    border: 1px solid #2563eb;
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
 }
 
 .back-button:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #ffffff;
+    transform: translateX(-2px);
+}
+
+.back-button svg {
+    width: 18px;
+    height: 18px;
 }
 
 .detail-title {
@@ -62,7 +73,7 @@
 }
 
 .detail-subtitle {
-    margin-top: 4px;
+    margin-top: 5px;
     font-size: 12px;
     color: var(--muted);
 }
@@ -75,58 +86,40 @@
 .detail-status {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 
-    padding: 8px 12px;
+    padding: 9px 14px;
 
-    border-radius: 20px;
+    border-radius: 8px;
 
     font-size: 11px;
     font-weight: 700;
 
-    white-space: nowrap;
+    color: #ffffff;
 }
 
 .detail-status-dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
-    display: inline-block;
+
+    background: #ffffff;
 }
 
 .detail-status.pending {
-    background: #fff7ed;
-    color: #c2410c;
-}
-
-.detail-status.pending .detail-status-dot {
-    background: #f97316;
+    background: #ea580c;
 }
 
 .detail-status.confirmed {
-    background: #f0fdf4;
-    color: #15803d;
-}
-
-.detail-status.confirmed .detail-status-dot {
     background: #16a34a;
 }
 
 .detail-status.cancelled {
-    background: #fef2f2;
-    color: #b91c1c;
-}
-
-.detail-status.cancelled .detail-status-dot {
     background: #dc2626;
 }
 
 .detail-status.completed {
-    background: #eff6ff;
-    color: #1d4ed8;
-}
-
-.detail-status.completed .detail-status-dot {
     background: #2563eb;
 }
 
@@ -153,6 +146,7 @@
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .detail-card:last-child {
@@ -160,18 +154,53 @@
 }
 
 .detail-card-header {
-    padding: 17px 20px;
-    border-bottom: 1px solid var(--border);
+    min-height: 58px;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
+    padding: 14px 20px;
+
+    border-bottom: 1px solid var(--border);
+    background: #ffffff;
+}
+
+.detail-card-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.detail-card-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    border-radius: 8px;
+}
+
+.detail-card-icon svg {
+    width: 17px;
+    height: 17px;
 }
 
 .detail-card-title {
     font-size: 13px;
     font-weight: 700;
     color: var(--text);
+}
+
+.detail-card-subtitle {
+    margin-top: 2px;
+    font-size: 10px;
+    color: var(--muted);
 }
 
 .detail-card-body {
@@ -186,37 +215,43 @@
 .customer-detail {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 15px;
+
+    padding: 16px;
+
+    background: #2563eb;
+
+    border-radius: 10px;
 }
 
 .customer-detail-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-
-    background: #eff6ff;
-    color: var(--primary);
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 17px;
-    font-weight: 700;
+    background: #ffffff;
+    color: #2563eb;
 
-    flex-shrink: 0;
+    border-radius: 50%;
+
+    font-size: 17px;
+    font-weight: 800;
 }
 
 .customer-detail-name {
     font-size: 14px;
     font-weight: 700;
-    color: var(--text);
+    color: #ffffff;
 }
 
 .customer-detail-email {
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--muted);
+    margin-top: 5px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.82);
 }
 
 
@@ -228,78 +263,106 @@
     display: flex;
     align-items: center;
     gap: 15px;
+
+    padding: 15px;
+
+    background: #0f766e;
+
+    border-radius: 10px;
 }
 
 .room-image,
 .room-placeholder {
-    width: 90px;
-    height: 70px;
+    width: 100px;
+    height: 76px;
 
-    border-radius: 9px;
+    flex: 0 0 100px;
 
     object-fit: cover;
 
-    border: 1px solid var(--border);
+    border-radius: 8px;
 
-    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.45);
 }
 
 .room-placeholder {
-    background: #f8fafc;
-    color: #94a3b8;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 24px;
+    background: #ffffff;
+    color: #0f766e;
+}
+
+.room-placeholder svg {
+    width: 27px;
+    height: 27px;
 }
 
 .room-detail-name {
     font-size: 14px;
     font-weight: 700;
+    color: #ffffff;
 }
 
 .room-detail-type {
     margin-top: 5px;
     font-size: 11px;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.82);
 }
 
 
 /* =========================================================
-   BOOKING INFORMATION
+   BOOKING DETAILS
 ========================================================= */
 
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
+    gap: 10px;
 
-    background: var(--border);
-
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    overflow: hidden;
+    background: #ffffff;
 }
 
 .info-item {
-    background: var(--white);
+    min-height: 82px;
+
     padding: 15px;
+
+    border-radius: 9px;
+
+    background: #f1f5f9;
+    border-left: 4px solid #2563eb;
+}
+
+.info-item:nth-child(2) {
+    border-left-color: #0f766e;
+}
+
+.info-item:nth-child(3) {
+    border-left-color: #7c3aed;
+}
+
+.info-item:nth-child(4) {
+    border-left-color: #ea580c;
 }
 
 .info-label {
     font-size: 10px;
-    color: var(--muted);
-    font-weight: 600;
+    color: #64748b;
+
+    font-weight: 700;
+
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
 .info-value {
-    margin-top: 6px;
+    margin-top: 7px;
+
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
+
     color: var(--text);
 }
 
@@ -309,15 +372,41 @@
 ========================================================= */
 
 .special-request {
-    background: #f8fafc;
-    border: 1px solid var(--border);
-    border-radius: 9px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 
-    padding: 14px;
+    padding: 15px;
+
+    background: #fef3c7;
+
+    border: 1px solid #f59e0b;
+    border-radius: 9px;
 
     font-size: 12px;
     line-height: 1.7;
-    color: #475569;
+
+    color: #78350f;
+}
+
+.special-request-icon {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f59e0b;
+    color: #ffffff;
+
+    border-radius: 7px;
+}
+
+.special-request-icon svg {
+    width: 16px;
+    height: 16px;
 }
 
 
@@ -326,18 +415,22 @@
 ========================================================= */
 
 .total-box {
+    overflow: hidden;
+
     border: 1px solid var(--border);
     border-radius: 10px;
-    overflow: hidden;
 }
 
 .total-row {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+
     gap: 20px;
 
     padding: 13px 14px;
+
+    background: #ffffff;
 
     border-bottom: 1px solid #f1f5f9;
 }
@@ -352,27 +445,86 @@
 }
 
 .total-value {
+    max-width: 60%;
+
     font-size: 11px;
-    font-weight: 600;
-    text-align: right;
+    font-weight: 700;
+
     color: var(--text);
+
+    text-align: right;
 }
 
 .total-final {
-    background: #f8fafc;
-    padding: 17px 14px;
+    padding: 18px 14px;
+
+    background: #2563eb;
 }
 
 .total-final .total-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #ffffff;
+
     font-size: 12px;
     font-weight: 700;
-    color: var(--text);
 }
 
 .total-final .total-value {
-    font-size: 18px;
+    color: #ffffff;
+
+    font-size: 19px;
     font-weight: 800;
-    color: var(--primary);
+}
+
+.total-final-icon {
+    display: flex;
+}
+
+.total-final-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================================================
+   PAYMENT STATUS
+========================================================= */
+
+.payment-status {
+    margin-top: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 12px 13px;
+
+    border-radius: 8px;
+
+    background: #f1f5f9;
+}
+
+.payment-status-label {
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.payment-status-value {
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 800;
 }
 
 
@@ -386,21 +538,37 @@
     gap: 10px;
 }
 
+.detail-actions form {
+    width: 100%;
+    margin: 0;
+}
+
 .detail-action {
     width: 100%;
-    min-height: 42px;
+    min-height: 45px;
 
-    border-radius: 8px;
-    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
 
     padding: 10px 14px;
+
+    border: none;
+    border-radius: 8px;
 
     font-size: 12px;
     font-weight: 700;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: 0.2s ease;
+}
+
+.detail-action svg {
+    width: 16px;
+    height: 16px;
 }
 
 .detail-action:hover {
@@ -409,7 +577,7 @@
 
 .detail-confirm {
     background: #16a34a;
-    color: white;
+    color: #ffffff;
 }
 
 .detail-confirm:hover {
@@ -417,22 +585,21 @@
 }
 
 .detail-cancel {
-    background: #fff;
-    color: #dc2626;
-    border-color: #fecaca;
+    background: #dc2626;
+    color: #ffffff;
 }
 
 .detail-cancel:hover {
-    background: #fef2f2;
+    background: #b91c1c;
 }
 
 .detail-complete {
-    background: var(--primary);
-    color: white;
+    background: #2563eb;
+    color: #ffffff;
 }
 
 .detail-complete:hover {
-    background: var(--primary-dark);
+    background: #1d4ed8;
 }
 
 
@@ -441,29 +608,34 @@
 ========================================================= */
 
 .status-message {
-    padding: 13px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    padding: 14px;
+
     border-radius: 9px;
 
     font-size: 11px;
     line-height: 1.5;
+    font-weight: 700;
 }
 
-.status-message.confirmed {
-    background: #f0fdf4;
-    color: #166534;
-    border: 1px solid #bbf7d0;
+.status-message svg {
+    width: 17px;
+    height: 17px;
+
+    flex: 0 0 17px;
 }
 
 .status-message.cancelled {
-    background: #fef2f2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
+    background: #dc2626;
+    color: #ffffff;
 }
 
 .status-message.completed {
-    background: #eff6ff;
-    color: #1e40af;
-    border: 1px solid #bfdbfe;
+    background: #2563eb;
+    color: #ffffff;
 }
 
 
@@ -480,7 +652,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 15px;
+
+    min-height: 42px;
 
     padding: 11px 0;
 
@@ -492,8 +667,8 @@
 }
 
 .meta-row:last-child {
-    border-bottom: none;
     padding-bottom: 0;
+    border-bottom: none;
 }
 
 .meta-label {
@@ -503,9 +678,41 @@
 
 .meta-value {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
+
     color: var(--text);
+
     text-align: right;
+}
+
+.meta-status {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.meta-status.pending {
+    background: #ea580c;
+}
+
+.meta-status.confirmed {
+    background: #16a34a;
+}
+
+.meta-status.cancelled {
+    background: #dc2626;
+}
+
+.meta-status.completed {
+    background: #2563eb;
 }
 
 
@@ -527,6 +734,7 @@
     .detail-page-header {
         align-items: flex-start;
         flex-direction: column;
+        gap: 14px;
     }
 
     .detail-status {
@@ -535,6 +743,15 @@
 
     .detail-title {
         font-size: 19px;
+    }
+
+    .detail-card {
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .detail-card-header {
+        padding: 14px 15px;
     }
 
     .detail-card-body {
@@ -551,638 +768,1201 @@
 
     .room-image,
     .room-placeholder {
-        width: 75px;
-        height: 60px;
+        width: 80px;
+        height: 62px;
+        flex-basis: 80px;
     }
 
-    .total-row {
+    .total-value {
+        max-width: 55%;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .detail-header-left {
         gap: 10px;
+    }
+
+    .back-button {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .detail-status {
+        margin-left: 48px;
+    }
+
+    .detail-card-title {
+        font-size: 12px;
+    }
+
+    .detail-card-icon {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+    }
+
+    .customer-detail {
+        padding: 13px;
+    }
+
+    .customer-detail-avatar {
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+    }
+
+    .customer-detail-name {
+        font-size: 13px;
+    }
+
+    .customer-detail-email {
+        font-size: 10px;
+    }
+
+    .total-final .total-value {
+        font-size: 16px;
     }
 
 }
 
 </style>
 
+
 <div class="reservation-detail-page">
 
 
-<!-- =====================================================
-     PAGE HEADER
-====================================================== -->
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
 
-<div class="detail-page-header">
+    <div class="detail-page-header">
 
-    <div class="detail-header-left">
+        <div class="detail-header-left">
 
-        <a
-            href="{% url 'reservation_list' %}"
-            class="back-button"
-            title="Back to reservations"
-        >
-            ←
-        </a>
+            <a
+                href="{% url 'reservation_list' %}"
+                class="back-button"
+                title="Back to reservations"
+                aria-label="Back to reservations"
+            >
 
-        <div>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
 
-            <div class="detail-title">
-                Reservation #{{ reservation.id }}
-            </div>
-
-            <div class="detail-subtitle">
-                Reservation details and booking information
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- STATUS -->
-
-    {% if reservation.status == "PENDING" %}
-
-        <div class="detail-status pending">
-            <span class="detail-status-dot"></span>
-            Pending
-        </div>
-
-    {% elif reservation.status == "CONFIRMED" %}
-
-        <div class="detail-status confirmed">
-            <span class="detail-status-dot"></span>
-            Confirmed
-        </div>
-
-    {% elif reservation.status == "CANCELLED" %}
-
-        <div class="detail-status cancelled">
-            <span class="detail-status-dot"></span>
-            Cancelled
-        </div>
-
-    {% elif reservation.status == "COMPLETED" %}
-
-        <div class="detail-status completed">
-            <span class="detail-status-dot"></span>
-            Completed
-        </div>
-
-    {% endif %}
-
-</div>
+            </a>
 
 
-<!-- =====================================================
-     MAIN GRID
-====================================================== -->
+            <div>
 
-<div class="detail-grid">
-
-
-    <!-- =================================================
-         LEFT COLUMN
-    ================================================== -->
-
-    <div>
-
-
-        <!-- CUSTOMER -->
-
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Customer Information
+                <div class="detail-title">
+                    Reservation #{{ reservation.id }}
                 </div>
 
-            </div>
-
-
-            <div class="detail-card-body">
-
-                <div class="customer-detail">
-
-                    <div class="customer-detail-avatar">
-
-                        {{ reservation.customer.username|first|upper }}
-
-                    </div>
-
-                    <div>
-
-                        <div class="customer-detail-name">
-                            {{ reservation.customer.username }}
-                        </div>
-
-                        <div class="customer-detail-email">
-                            {{ reservation.customer.email }}
-                        </div>
-
-                    </div>
-
+                <div class="detail-subtitle">
+                    Reservation details and booking information
                 </div>
 
             </div>
 
         </div>
 
-
-        <!-- ROOM / COTTAGE -->
-
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Room / Cottage
-                </div>
-
-            </div>
-
-
-            <div class="detail-card-body">
-
-                <div class="room-detail">
-
-                    {% if reservation.room.image %}
-
-                        <img
-                            src="{{ reservation.room.image.url }}"
-                            alt="{{ reservation.room.name }}"
-                            class="room-image"
-                        >
-
-                    {% else %}
-
-                        <div class="room-placeholder">
-                            ▤
-                        </div>
-
-                    {% endif %}
-
-
-                    <div>
-
-                        <div class="room-detail-name">
-                            {{ reservation.room.name }}
-                        </div>
-
-                        <div class="room-detail-type">
-                            {{ reservation.room.type }}
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- BOOKING DETAILS -->
-
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Booking Details
-                </div>
-
-            </div>
-
-
-            <div class="detail-card-body">
-
-                <div class="info-grid">
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Check-in
-                        </div>
-
-                        <div class="info-value">
-                            {{ reservation.check_in|date:"M d, Y" }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Check-out
-                        </div>
-
-                        <div class="info-value">
-                            {{ reservation.check_out|date:"M d, Y" }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Adults
-                        </div>
-
-                        <div class="info-value">
-                            {{ reservation.adults }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Children
-                        </div>
-
-                        <div class="info-value">
-                            {{ reservation.children }}
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- SPECIAL REQUEST -->
-
-        {% if reservation.special_request %}
-
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Special Request
-                </div>
-
-            </div>
-
-            <div class="detail-card-body">
-
-                <div class="special-request">
-                    {{ reservation.special_request }}
-                </div>
-
-            </div>
-
-        </div>
-
-        {% endif %}
-
-
-    </div>
-
-
-    <!-- =================================================
-         RIGHT COLUMN
-    ================================================== -->
-
-    <div>
-
-
-        <!-- PAYMENT SUMMARY -->
-
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Payment Summary
-                </div>
-
-            </div>
-
-
-            <div class="detail-card-body">
-
-                <div class="total-box">
-
-
-                    <div class="total-row">
-
-                        <span class="total-label">
-                            Room / Cottage
-                        </span>
-
-                        <span class="total-value">
-                            {{ reservation.room.name }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="total-row">
-
-                        <span class="total-label">
-                            Check-in
-                        </span>
-
-                        <span class="total-value">
-                            {{ reservation.check_in|date:"M d, Y" }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="total-row">
-
-                        <span class="total-label">
-                            Check-out
-                        </span>
-
-                        <span class="total-value">
-                            {{ reservation.check_out|date:"M d, Y" }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="total-row">
-
-                        <span class="total-label">
-                            Guests
-                        </span>
-
-                        <span class="total-value">
-                            {{ reservation.adults }} adult{{ reservation.adults|pluralize }}
-
-                            {% if reservation.children %}
-                                + {{ reservation.children }} child{{ reservation.children|pluralize }}
-                            {% endif %}
-                        </span>
-
-                    </div>
-
-
-                    <div class="total-row total-final">
-
-                        <span class="total-label">
-                            Total Amount
-                        </span>
-
-                        <span class="total-value">
-                            ₱{{ reservation.total_amount }}
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ACTIONS -->
 
         {% if reservation.status == "PENDING" %}
 
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Reservation Actions
-                </div>
-
+            <div class="detail-status pending">
+                <span class="detail-status-dot"></span>
+                Pending
             </div>
-
-
-            <div class="detail-card-body">
-
-                <div class="detail-actions">
-
-
-                    <!-- CONFIRM -->
-
-                    <form
-                        method="POST"
-                        action="{% url 'confirm_reservation' reservation.id %}"
-                    >
-
-                        {% csrf_token %}
-
-                        <button
-                            type="submit"
-                            class="detail-action detail-confirm"
-                            onclick="return confirm(
-                                'Are you sure you want to confirm this reservation?'
-                            );"
-                        >
-                            ✓ Confirm Reservation
-                        </button>
-
-                    </form>
-
-
-                    <!-- CANCEL -->
-
-                    <form
-                        method="POST"
-                        action="{% url 'cancel_reservation' reservation.id %}"
-                    >
-
-                        {% csrf_token %}
-
-                        <button
-                            type="submit"
-                            class="detail-action detail-cancel"
-                            onclick="return confirm(
-                                'Are you sure you want to cancel this reservation?'
-                            );"
-                        >
-                            × Cancel Reservation
-                        </button>
-
-                    </form>
-
-
-                </div>
-
-            </div>
-
-        </div>
 
         {% elif reservation.status == "CONFIRMED" %}
 
-        <!-- COMPLETE -->
-
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Reservation Actions
-                </div>
-
+            <div class="detail-status confirmed">
+                <span class="detail-status-dot"></span>
+                Confirmed
             </div>
-
-            <div class="detail-card-body">
-
-                <div class="detail-actions">
-
-                    <form
-                        method="POST"
-                        action="{% url 'complete_reservation' reservation.id %}"
-                    >
-
-                        {% csrf_token %}
-
-                        <button
-                            type="submit"
-                            class="detail-action detail-complete"
-                            onclick="return confirm(
-                                'Mark this reservation as completed?'
-                            );"
-                        >
-                            ✓ Complete Reservation
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-
 
         {% elif reservation.status == "CANCELLED" %}
 
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Reservation Status
-                </div>
-
+            <div class="detail-status cancelled">
+                <span class="detail-status-dot"></span>
+                Cancelled
             </div>
-
-            <div class="detail-card-body">
-
-                <div class="status-message cancelled">
-
-                    This reservation has been cancelled.
-
-                </div>
-
-            </div>
-
-        </div>
-
 
         {% elif reservation.status == "COMPLETED" %}
 
-        <div class="detail-card">
-
-            <div class="detail-card-header">
-
-                <div class="detail-card-title">
-                    Reservation Status
-                </div>
-
+            <div class="detail-status completed">
+                <span class="detail-status-dot"></span>
+                Completed
             </div>
-
-            <div class="detail-card-body">
-
-                <div class="status-message completed">
-
-                    This reservation has been completed successfully.
-
-                </div>
-
-            </div>
-
-        </div>
 
         {% endif %}
 
+    </div>
 
-        <!-- RESERVATION INFORMATION -->
 
-        <div class="detail-card">
+    <!-- =====================================================
+         MAIN GRID
+    ====================================================== -->
 
-            <div class="detail-card-header">
+    <div class="detail-grid">
 
-                <div class="detail-card-title">
-                    Reservation Information
+
+        <!-- =================================================
+             LEFT COLUMN
+        ================================================== -->
+
+        <div>
+
+
+            <!-- CUSTOMER -->
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div class="detail-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M20 21a8 8 0 0 0-16 0"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Customer Information
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Guest account details
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="customer-detail">
+
+                        <div class="customer-detail-avatar">
+                            {{ reservation.customer.username|first|upper }}
+                        </div>
+
+                        <div>
+
+                            <div class="customer-detail-name">
+                                {{ reservation.customer.username }}
+                            </div>
+
+                            <div class="customer-detail-email">
+                                {{ reservation.customer.email }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
 
-            <div class="detail-card-body">
+            <!-- ROOM -->
 
-                <div class="meta-list">
+            <div class="detail-card">
 
+                <div class="detail-card-header">
 
-                    <div class="meta-row">
+                    <div class="detail-card-title-wrap">
 
-                        <span class="meta-label">
-                            Reservation ID
-                        </span>
+                        <div class="detail-card-icon">
 
-                        <span class="meta-value">
-                            #{{ reservation.id }}
-                        </span>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M3 21V9l9-6 9 6v12"></path>
+                                <path d="M9 21v-6h6v6"></path>
+                                <path d="M7 12h.01"></path>
+                                <path d="M17 12h.01"></path>
+                            </svg>
 
-                    </div>
+                        </div>
 
+                        <div>
 
-                    <div class="meta-row">
+                            <div class="detail-card-title">
+                                Room / Cottage
+                            </div>
 
-                        <span class="meta-label">
-                            Status
-                        </span>
+                            <div class="detail-card-subtitle">
+                                Reserved accommodation
+                            </div>
 
-                        <span class="meta-value">
-                            {{ reservation.status }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="meta-row">
-
-                        <span class="meta-label">
-                            Created
-                        </span>
-
-                        <span class="meta-value">
-
-                            {{ reservation.created_at|date:"M d, Y h:i A" }}
-
-                        </span>
+                        </div>
 
                     </div>
 
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="room-detail">
+
+                        {% if reservation.room.image %}
+
+                            <img
+                                src="{{ reservation.room.image.url }}"
+                                alt="{{ reservation.room.name }}"
+                                class="room-image"
+                            >
+
+                        {% else %}
+
+                            <div class="room-placeholder">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M3 21h18"></path>
+                                    <path d="M5 21V7l7-4 7 4v14"></path>
+                                    <path d="M9 21v-5h6v5"></path>
+                                    <path d="M9 9h.01"></path>
+                                    <path d="M15 9h.01"></path>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div>
+
+                            <div class="room-detail-name">
+                                {{ reservation.room.name }}
+                            </div>
+
+                            <div class="room-detail-type">
+                                {{ reservation.room.type }}
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
+
+
+            <!-- BOOKING DETAILS -->
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div class="detail-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Booking Details
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Stay schedule and guest count
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="info-grid">
+
+                        <div class="info-item">
+
+                            <div class="info-label">
+                                Check-in
+                            </div>
+
+                            <div class="info-value">
+                                {{ reservation.check_in|date:"M d, Y" }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <div class="info-label">
+                                Check-out
+                            </div>
+
+                            <div class="info-value">
+                                {{ reservation.check_out|date:"M d, Y" }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <div class="info-label">
+                                Adults
+                            </div>
+
+                            <div class="info-value">
+                                {{ reservation.adults }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <div class="info-label">
+                                Children
+                            </div>
+
+                            <div class="info-value">
+                                {{ reservation.children }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SPECIAL REQUEST -->
+
+            {% if reservation.special_request %}
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div class="detail-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Special Request
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Additional guest instructions
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="special-request">
+
+                        <div class="special-request-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M12 10v6"></path>
+                                <path d="M12 7h.01"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+                            {{ reservation.special_request }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
 
         </div>
 
 
-    </div>
+        <!-- =================================================
+             RIGHT COLUMN
+        ================================================== -->
 
-</div>
+        <div>
+
+
+            <!-- PAYMENT SUMMARY -->
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div class="detail-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                <line x1="2" y1="10" x2="22" y2="10"></line>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Payment Summary
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Reservation billing details
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="total-box">
+
+                        <div class="total-row">
+
+                            <span class="total-label">
+                                Room / Cottage
+                            </span>
+
+                            <span class="total-value">
+                                {{ reservation.room.name }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="total-row">
+
+                            <span class="total-label">
+                                Check-in
+                            </span>
+
+                            <span class="total-value">
+                                {{ reservation.check_in|date:"M d, Y" }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="total-row">
+
+                            <span class="total-label">
+                                Check-out
+                            </span>
+
+                            <span class="total-value">
+                                {{ reservation.check_out|date:"M d, Y" }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="total-row">
+
+                            <span class="total-label">
+                                Guests
+                            </span>
+
+                            <span class="total-value">
+
+                                {{ reservation.adults }}
+                                adult{{ reservation.adults|pluralize }}
+
+                                {% if reservation.children %}
+                                    + {{ reservation.children }}
+                                    child{{ reservation.children|pluralize }}
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="total-row total-final">
+
+                            <span class="total-label">
+
+                                <span class="total-final-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M12 1v22"></path>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+
+                                </span>
+
+                                Total Amount
+
+                            </span>
+
+                            <span class="total-value">
+                                ₱{{ reservation.total_amount }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if reservation.payment_status %}
+
+                    <div class="payment-status">
+
+                        <span class="payment-status-label">
+                            Payment Status
+                        </span>
+
+                        <span
+                            class="payment-status-value"
+                            style="
+                                {% if reservation.payment_status == 'PAID' %}
+                                    background:#16a34a;
+                                {% elif reservation.payment_status == 'PENDING' %}
+                                    background:#ea580c;
+                                {% elif reservation.payment_status == 'REJECTED' %}
+                                    background:#dc2626;
+                                {% else %}
+                                    background:#64748b;
+                                {% endif %}
+                            "
+                        >
+                            {{ reservation.payment_status }}
+                        </span>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            {% if reservation.status == "PENDING" %}
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div
+                            class="detail-card-icon"
+                            style="background:#ea580c;"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M12 7v5l3 2"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Reservation Actions
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Manage pending reservation
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="detail-actions">
+
+                        <form
+                            method="POST"
+                            action="{% url 'confirm_reservation' reservation.id %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="detail-action detail-confirm"
+                                onclick="return confirm(
+                                    'Are you sure you want to confirm this reservation?'
+                                );"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+
+                                Confirm Reservation
+
+                            </button>
+
+                        </form>
+
+
+                        <form
+                            method="POST"
+                            action="{% url 'cancel_reservation' reservation.id %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="detail-action detail-cancel"
+                                onclick="return confirm(
+                                    'Are you sure you want to cancel this reservation?'
+                                );"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M15 9l-6 6"></path>
+                                    <path d="M9 9l6 6"></path>
+                                </svg>
+
+                                Cancel Reservation
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% elif reservation.status == "CONFIRMED" %}
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div
+                            class="detail-card-icon"
+                            style="background:#16a34a;"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M8 12l3 3 5-6"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Reservation Actions
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Complete this reservation
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="detail-actions">
+
+                        <form
+                            method="POST"
+                            action="{% url 'complete_reservation' reservation.id %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="detail-action detail-complete"
+                                onclick="return confirm(
+                                    'Mark this reservation as completed?'
+                                );"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M8 12l3 3 5-6"></path>
+                                </svg>
+
+                                Complete Reservation
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% elif reservation.status == "CANCELLED" %}
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div
+                            class="detail-card-icon"
+                            style="background:#dc2626;"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M15 9l-6 6"></path>
+                                <path d="M9 9l6 6"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Reservation Status
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Current reservation state
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="status-message cancelled">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M15 9l-6 6"></path>
+                            <path d="M9 9l6 6"></path>
+                        </svg>
+
+                        <span>
+                            This reservation has been cancelled.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% elif reservation.status == "COMPLETED" %}
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div
+                            class="detail-card-icon"
+                            style="background:#2563eb;"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M8 12l3 3 5-6"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Reservation Status
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Current reservation state
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="status-message completed">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M8 12l3 3 5-6"></path>
+                        </svg>
+
+                        <span>
+                            This reservation has been completed successfully.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- RESERVATION INFORMATION -->
+
+            <div class="detail-card">
+
+                <div class="detail-card-header">
+
+                    <div class="detail-card-title-wrap">
+
+                        <div
+                            class="detail-card-icon"
+                            style="background:#7c3aed;"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M12 10v6"></path>
+                                <path d="M12 7h.01"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="detail-card-title">
+                                Reservation Information
+                            </div>
+
+                            <div class="detail-card-subtitle">
+                                Reservation record details
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card-body">
+
+                    <div class="meta-list">
+
+
+                        <div class="meta-row">
+
+                            <span class="meta-label">
+                                Reservation ID
+                            </span>
+
+                            <span class="meta-value">
+                                #{{ reservation.id }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="meta-row">
+
+                            <span class="meta-label">
+                                Status
+                            </span>
+
+                            <span class="meta-value">
+
+                                {% if reservation.status == "PENDING" %}
+
+                                    <span class="meta-status pending">
+                                        Pending
+                                    </span>
+
+                                {% elif reservation.status == "CONFIRMED" %}
+
+                                    <span class="meta-status confirmed">
+                                        Confirmed
+                                    </span>
+
+                                {% elif reservation.status == "CANCELLED" %}
+
+                                    <span class="meta-status cancelled">
+                                        Cancelled
+                                    </span>
+
+                                {% elif reservation.status == "COMPLETED" %}
+
+                                    <span class="meta-status completed">
+                                        Completed
+                                    </span>
+
+                                {% else %}
+
+                                    {{ reservation.status }}
+
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="meta-row">
+
+                            <span class="meta-label">
+                                Created
+                            </span>
+
+                            <span class="meta-value">
+                                {{ reservation.created_at|date:"M d, Y h:i A" }}
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -2,17 +2,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils.timezone import now
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from datetime import date
 from django.db.models import Q
-from .models import Room, Reservation
-
+from .models import Room, Reservation, RoomMapPosition
+from django.http import JsonResponse
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from django.contrib.auth.decorators import login_required
 from .ai_assistant import generate_ai_response
 
 @api_view(["POST"])
@@ -988,6 +992,140 @@ def ai_assistant(request):
             "success": True,
             "message": message,
             "response": answer,
+        },
+        status=status.HTTP_200_OK
+    )
+
+def resort_map_rooms(request):
+
+    rooms = (
+        Room.objects
+        .select_related("map_position")
+        .all()
+        .order_by("id")
+    )
+
+    room_data = []
+
+    for room in rooms:
+
+        map_position = None
+
+        try:
+
+            position = room.map_position
+
+            map_position = {
+                "x": float(position.x),
+                "y": float(position.y),
+                "width": float(position.width),
+                "height": float(position.height),
+                "is_visible": position.is_visible,
+            }
+
+        except RoomMapPosition.DoesNotExist:
+
+            map_position = None
+
+        room_data.append({
+
+            "id": room.id,
+
+            "name": room.name,
+
+            "type": room.type,
+
+            "description": room.description,
+
+            "price": str(room.price),
+
+            "capacity": room.capacity,
+
+            "status": room.status,
+
+            "map_position": map_position,
+
+        })
+
+    return JsonResponse({
+
+        "success": True,
+
+        "rooms": room_data,
+
+    })
+
+@api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def my_reservation_map(request):
+
+    print("AUTH USER:", request.user)
+    print("IS AUTHENTICATED:", request.user.is_authenticated)
+
+    reservation = (
+        Reservation.objects
+        .select_related(
+            "room",
+            "room__map_position"
+        )
+        .filter(
+            customer=request.user,
+            status="CONFIRMED",
+        )
+        .order_by("-created_at")
+        .first()
+    )
+
+    if not reservation:
+        return Response(
+            {
+                "success": False,
+                "message": "No confirmed reservation was found."
+            },
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    room = reservation.room
+
+    map_position = None
+
+    try:
+        position = room.map_position
+
+        if position.is_visible:
+            map_position = {
+                "x": float(position.x),
+                "y": float(position.y),
+                "width": float(position.width),
+                "height": float(position.height),
+                "is_visible": True,
+            }
+
+    except RoomMapPosition.DoesNotExist:
+        map_position = None
+
+    return Response(
+        {
+            "success": True,
+
+            "reservation": {
+                "id": reservation.id,
+                "status": reservation.status,
+                "payment_status": reservation.payment_status,
+                "check_in": reservation.check_in,
+                "check_out": reservation.check_out,
+            },
+
+            "room": {
+                "id": room.id,
+                "name": room.name,
+                "type": room.type,
+                "description": room.description,
+                "price": str(room.price),
+                "capacity": room.capacity,
+                "map_position": map_position,
+            },
         },
         status=status.HTTP_200_OK
     )

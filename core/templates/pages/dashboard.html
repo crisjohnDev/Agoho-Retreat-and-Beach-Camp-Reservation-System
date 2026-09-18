@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -77,77 +78,278 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
+
+
+/* =========================================================
+   STAT CARD BASE
+   SOLID COLOR — NO GRADIENT
+========================================================= */
 
 .stat-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
+    position: relative;
+
+    padding: 20px;
+
+    min-height: 145px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    border: none !important;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+
+/* REMOVE ALL DECORATIVE SHAPES */
+
+.stat-card::before,
+.stat-card::after {
+    display: none !important;
+    content: none !important;
+}
+
+
+/* =========================================================
+   BLUE CARD
+========================================================= */
+
+.stat-card.blue {
+    background: #2563eb !important;
+    background-image: none !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.22);
+}
+
+.stat-card.blue:hover {
+    box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.30);
+}
+
+.stat-card.blue .stat-label {
+    color: #ffffff !important;
+}
+
+.stat-card.blue .stat-value {
+    color: #ffffff !important;
+}
+
+.stat-card.blue .stat-description {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* =========================================================
+   ORANGE CARD
+========================================================= */
+
+.stat-card.orange {
+    background: #ea580c !important;
+    background-image: none !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 8px 20px rgba(234, 88, 12, 0.22);
+}
+
+.stat-card.orange:hover {
+    box-shadow:
+        0 12px 28px rgba(234, 88, 12, 0.30);
+}
+
+.stat-card.orange .stat-label {
+    color: #ffffff !important;
+}
+
+.stat-card.orange .stat-value {
+    color: #ffffff !important;
+}
+
+.stat-card.orange .stat-description {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* =========================================================
+   GREEN CARD
+========================================================= */
+
+.stat-card.green {
+    background: #16a34a !important;
+    background-image: none !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 8px 20px rgba(22, 163, 74, 0.22);
+}
+
+.stat-card.green:hover {
+    box-shadow:
+        0 12px 28px rgba(22, 163, 74, 0.30);
+}
+
+.stat-card.green .stat-label {
+    color: #ffffff !important;
+}
+
+.stat-card.green .stat-value {
+    color: #ffffff !important;
+}
+
+.stat-card.green .stat-description {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* =========================================================
+   PURPLE CARD
+========================================================= */
+
+.stat-card.purple {
+    background: #9333ea !important;
+    background-image: none !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 8px 20px rgba(147, 51, 234, 0.22);
+}
+
+.stat-card.purple:hover {
+    box-shadow:
+        0 12px 28px rgba(147, 51, 234, 0.30);
+}
+
+.stat-card.purple .stat-label {
+    color: #ffffff !important;
+}
+
+.stat-card.purple .stat-value {
+    color: #ffffff !important;
+}
+
+.stat-card.purple .stat-description {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* =========================================================
+   STAT TOP
+========================================================= */
+
 .stat-top {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 10px;
 }
 
 .stat-label {
     font-size: 11px;
-    color: var(--muted);
-    font-weight: 600;
+    font-weight: 700;
 }
 
+
+/* =========================================================
+   STAT ICON
+   SIMPLE SVG — NO ICON BACKGROUND
+========================================================= */
+
 .stat-icon {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 8px;
+    flex-shrink: 0;
 
-    font-size: 15px;
-    font-weight: 700;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+
+    color: #ffffff !important;
 }
 
-.stat-icon.blue {
-    background: #eff6ff;
-    color: #2563eb;
+.stat-icon svg {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+
+    color: #ffffff;
+    stroke: currentColor;
 }
 
-.stat-icon.orange {
-    background: #fff7ed;
-    color: #ea580c;
-}
 
-.stat-icon.green {
-    background: #f0fdf4;
-    color: #16a34a;
-}
+/* =========================================================
+   FORCE ALL ICON COLORS WHITE
+========================================================= */
 
+.stat-icon.blue,
+.stat-icon.orange,
+.stat-icon.green,
 .stat-icon.purple {
-    background: #faf5ff;
-    color: #9333ea;
+    background: transparent !important;
+    color: #ffffff !important;
 }
+
+
+/* =========================================================
+   STAT VALUE
+========================================================= */
 
 .stat-value {
-    margin-top: 15px;
+    position: relative;
+    z-index: 2;
 
-    font-size: 27px;
+    margin-top: 18px;
+
+    font-size: 30px;
+    line-height: 1;
+
     font-weight: 800;
 
-    color: var(--text);
+    color: #ffffff !important;
 }
 
+
+/* =========================================================
+   STAT DESCRIPTION
+========================================================= */
+
 .stat-description {
-    margin-top: 4px;
+    position: relative;
+    z-index: 2;
+
+    margin-top: 9px;
 
     font-size: 11px;
-    color: var(--muted);
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.88) !important;
 }
 
 
@@ -169,16 +371,20 @@
 
 
 /* =========================================================
-   CARD
+   GENERAL CARD
 ========================================================= */
 
 .card {
     background: var(--white);
 
     border: 1px solid var(--border);
-    border-radius: 12px;
+
+    border-radius: 14px;
 
     overflow: hidden;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.04);
 }
 
 .card-header {
@@ -199,6 +405,7 @@
 
 .view-all {
     color: var(--primary);
+
     text-decoration: none;
 
     font-size: 11px;
@@ -244,6 +451,7 @@ td {
     border-top: 1px solid #f1f5f9;
 
     font-size: 12px;
+
     color: var(--text);
 }
 
@@ -255,6 +463,7 @@ td {
     margin-top: 4px;
 
     font-size: 10px;
+
     color: var(--muted);
 }
 
@@ -271,26 +480,27 @@ td {
     border-radius: 20px;
 
     font-size: 10px;
+
     font-weight: 700;
 }
 
 .status.confirmed {
-    background: #f0fdf4;
+    background: #dcfce7;
     color: #15803d;
 }
 
 .status.pending {
-    background: #fff7ed;
+    background: #ffedd5;
     color: #c2410c;
 }
 
 .status.cancelled {
-    background: #fef2f2;
+    background: #fee2e2;
     color: #b91c1c;
 }
 
 .status.completed {
-    background: #eff6ff;
+    background: #dbeafe;
     color: #1d4ed8;
 }
 
@@ -312,20 +522,29 @@ td {
 
     padding: 13px 10px;
 
-    border-radius: 9px;
+    border-radius: 10px;
 
     text-decoration: none;
 
-    transition: 0.2s;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 .action:hover {
     background: #f8fafc;
+
+    transform: translateX(3px);
 }
 
+
+/* =========================================================
+   ACTION ICON
+========================================================= */
+
 .action-icon {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
 
     display: flex;
     align-items: center;
@@ -333,18 +552,94 @@ td {
 
     flex-shrink: 0;
 
-    background: #eff6ff;
-    color: var(--primary);
-
-    border-radius: 8px;
-
-    font-size: 15px;
-    font-weight: 700;
+    border-radius: 10px;
 }
+
+.action-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+
+/* =========================================================
+   ACTION BLUE
+========================================================= */
+
+.action-icon.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.action:hover .action-icon.blue {
+    background: #bfdbfe;
+}
+
+
+/* =========================================================
+   ACTION GREEN
+========================================================= */
+
+.action-icon.green {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.action:hover .action-icon.green {
+    background: #bbf7d0;
+}
+
+
+/* =========================================================
+   ACTION ORANGE
+========================================================= */
+
+.action-icon.orange {
+    background: #ffedd5;
+    color: #ea580c;
+}
+
+.action:hover .action-icon.orange {
+    background: #fed7aa;
+}
+
+
+/* =========================================================
+   ACTION PURPLE
+========================================================= */
+
+.action-icon.purple {
+    background: #f3e8ff;
+    color: #9333ea;
+}
+
+.action:hover .action-icon.purple {
+    background: #e9d5ff;
+}
+
+
+/* =========================================================
+   ACTION SLATE
+========================================================= */
+
+.action-icon.slate {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.action:hover .action-icon.slate {
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   ACTION TEXT
+========================================================= */
 
 .action-title {
     font-size: 12px;
+
     font-weight: 700;
+
     color: var(--text);
 }
 
@@ -352,7 +647,34 @@ td {
     margin-top: 3px;
 
     font-size: 10px;
+
     color: var(--muted);
+}
+
+
+/* =========================================================
+   EMPTY TABLE
+========================================================= */
+
+.empty-state {
+    text-align: center;
+
+    color: #94a3b8;
+
+    padding: 35px;
+}
+
+
+/* =========================================================
+   CARD HEADER ACCENTS
+========================================================= */
+
+.dashboard-grid > .card:first-child .card-header {
+    background: #f8fbff;
+}
+
+.dashboard-grid > .card:last-child .card-header {
+    background: #fafafa;
 }
 
 
@@ -363,7 +685,10 @@ td {
 @media (max-width: 1000px) {
 
     .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
     }
 
     .dashboard-grid {
@@ -377,6 +702,7 @@ td {
 
     .topbar {
         align-items: flex-start;
+
         flex-direction: column;
     }
 
@@ -384,513 +710,837 @@ td {
         grid-template-columns: 1fr;
     }
 
+    .stat-card {
+        padding: 18px;
+    }
+
 }
 
 </style>
 
+
 <div class="dashboard-page">
 
-<!-- =====================================================
-     TOP BAR
-====================================================== -->
 
-<header class="topbar">
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
 
-    <div>
+    <header class="topbar">
 
-        <div class="page-title">
-            Dashboard
-        </div>
+        <div>
 
-        <div class="page-subtitle">
-            Reservation System Administration
-        </div>
-
-    </div>
-
-
-    <div class="admin-badge">
-        Superuser
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     CONTENT
-====================================================== -->
-
-<section class="content">
-
-
-    <!-- =================================================
-         WELCOME
-    ================================================== -->
-
-    <div class="welcome">
-
-        <h2>
-            Welcome back,
-            {{ request.user.username }}!
-        </h2>
-
-        <p>
-            Here's what's happening with your
-            reservations today.
-        </p>
-
-    </div>
-
-
-    <!-- =================================================
-         STATISTICS
-    ================================================== -->
-
-    <div class="stats">
-
-
-        <!-- TOTAL RESERVATIONS -->
-
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="stat-label">
-                    Total Reservations
-                </div>
-
-                <div class="stat-icon blue">
-                    ▣
-                </div>
-
+            <div class="page-title">
+                Dashboard
             </div>
 
-            <div class="stat-value">
-                {{ total_reservations|default:"0" }}
-            </div>
-
-            <div class="stat-description">
-                All reservations
+            <div class="page-subtitle">
+                Reservation System Administration
             </div>
 
         </div>
 
-
-        <!-- PENDING RESERVATIONS -->
-
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="stat-label">
-                    Pending Reservations
-                </div>
-
-                <div class="stat-icon orange">
-                    ◷
-                </div>
-
-            </div>
-
-            <div class="stat-value">
-                {{ pending_reservations|default:"0" }}
-            </div>
-
-            <div class="stat-description">
-                Waiting for confirmation
-            </div>
-
+        <div class="admin-badge">
+            Superuser
         </div>
 
-
-        <!-- CONFIRMED -->
-
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="stat-label">
-                    Confirmed
-                </div>
-
-                <div class="stat-icon green">
-                    ✓
-                </div>
-
-            </div>
-
-            <div class="stat-value">
-                {{ confirmed_reservations|default:"0" }}
-            </div>
-
-            <div class="stat-description">
-                Confirmed reservations
-            </div>
-
-        </div>
+    </header>
 
 
-        <!-- CUSTOMERS -->
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
 
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="stat-label">
-                    Customers
-                </div>
-
-                <div class="stat-icon purple">
-                    ♙
-                </div>
-
-            </div>
-
-            <div class="stat-value">
-                {{ total_customers|default:"0" }}
-            </div>
-
-            <div class="stat-description">
-                Registered customers
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =================================================
-         DASHBOARD GRID
-    ================================================== -->
-
-    <div class="dashboard-grid">
+    <section class="content">
 
 
         <!-- =================================================
-             RECENT RESERVATIONS
+             WELCOME
         ================================================== -->
 
-        <div class="card">
+        <div class="welcome">
 
-            <div class="card-header">
+            <h2>
+                Welcome back,
+                {{ request.user.username }}!
+            </h2>
 
-                <div class="card-title">
-                    Recent Reservations
+            <p>
+                Here's what's happening with your
+                reservations today.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="stats">
+
+
+            <!-- =================================================
+                 TOTAL RESERVATIONS
+            ================================================== -->
+
+            <div class="stat-card blue">
+
+                <div class="stat-top">
+
+                    <div class="stat-label">
+                        Total Reservations
+                    </div>
+
+                    <div class="stat-icon blue">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <rect
+                                x="3"
+                                y="4"
+                                width="18"
+                                height="17"
+                                rx="2"
+                            />
+
+                            <line
+                                x1="8"
+                                y1="2"
+                                x2="8"
+                                y2="6"
+                            />
+
+                            <line
+                                x1="16"
+                                y1="2"
+                                x2="16"
+                                y2="6"
+                            />
+
+                            <line
+                                x1="3"
+                                y1="9"
+                                x2="21"
+                                y2="9"
+                            />
+
+                            <line
+                                x1="8"
+                                y1="13"
+                                x2="10"
+                                y2="13"
+                            />
+
+                            <line
+                                x1="14"
+                                y1="13"
+                                x2="16"
+                                y2="13"
+                            />
+
+                            <line
+                                x1="8"
+                                y1="17"
+                                x2="10"
+                                y2="17"
+                            />
+
+                        </svg>
+
+                    </div>
+
                 </div>
 
-                <a
-                    href="{% url 'reservation_list' %}"
-                    class="view-all"
-                >
-                    View all
-                </a>
+
+                <div class="stat-value">
+                    {{ total_reservations|default:"0" }}
+                </div>
+
+
+                <div class="stat-description">
+                    All reservations
+                </div>
 
             </div>
 
 
-            <div class="table-wrapper">
+            <!-- =================================================
+                 PENDING RESERVATIONS
+            ================================================== -->
 
-                <table>
+            <div class="stat-card orange">
 
-                    <thead>
+                <div class="stat-top">
 
-                        <tr>
+                    <div class="stat-label">
+                        Pending Reservations
+                    </div>
 
-                            <th>
-                                Customer
-                            </th>
+                    <div class="stat-icon orange">
 
-                            <th>
-                                Reservation
-                            </th>
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
 
-                            <th>
-                                Status
-                            </th>
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="9"
+                            />
 
-                        </tr>
+                            <polyline
+                                points="12 7 12 12 15 14"
+                            />
 
-                    </thead>
+                        </svg>
 
+                    </div>
 
-                    <tbody>
-
-                        {% for reservation in recent_reservations %}
-
-                        <tr>
-
-
-                            <!-- CUSTOMER -->
-
-                            <td>
-
-                                <div class="reservation-name">
-
-                                    {{ reservation.customer.username }}
-
-                                </div>
-
-                                <div class="reservation-date">
-
-                                    {{ reservation.customer.email }}
-
-                                </div>
-
-                            </td>
+                </div>
 
 
-                            <!-- RESERVATION -->
-
-                            <td>
-
-                                <div class="reservation-name">
-
-                                    {{ reservation.room.name }}
-
-                                </div>
-
-                                <div class="reservation-date">
-
-                                    {{ reservation.check_in|date:"M d, Y" }}
-
-                                    -
-
-                                    {{ reservation.check_out|date:"M d, Y" }}
-
-                                </div>
-
-                            </td>
+                <div class="stat-value">
+                    {{ pending_reservations|default:"0" }}
+                </div>
 
 
-                            <!-- STATUS -->
+                <div class="stat-description">
+                    Waiting for confirmation
+                </div>
 
-                            <td>
-
-                                {% if reservation.status == "CONFIRMED" %}
-
-                                    <span class="status confirmed">
-                                        Confirmed
-                                    </span>
-
-                                {% elif reservation.status == "PENDING" %}
-
-                                    <span class="status pending">
-                                        Pending
-                                    </span>
-
-                                {% elif reservation.status == "CANCELLED" %}
-
-                                    <span class="status cancelled">
-                                        Cancelled
-                                    </span>
-
-                                {% elif reservation.status == "COMPLETED" %}
-
-                                    <span class="status completed">
-                                        Completed
-                                    </span>
-
-                                {% else %}
-
-                                    <span class="status cancelled">
-                                        {{ reservation.status }}
-                                    </span>
-
-                                {% endif %}
-
-                            </td>
+            </div>
 
 
-                        </tr>
+            <!-- =================================================
+                 CONFIRMED
+            ================================================== -->
 
-                        {% empty %}
+            <div class="stat-card green">
 
-                        <tr>
+                <div class="stat-top">
 
-                            <td
-                                colspan="3"
-                                style="
-                                    text-align:center;
-                                    color:#94a3b8;
-                                    padding:35px;
-                                "
+                    <div class="stat-label">
+                        Confirmed
+                    </div>
+
+                    <div class="stat-icon green">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="9"
+                            />
+
+                            <polyline
+                                points="8 12 11 15 16 9"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-value">
+                    {{ confirmed_reservations|default:"0" }}
+                </div>
+
+
+                <div class="stat-description">
+                    Confirmed reservations
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CUSTOMERS
+            ================================================== -->
+
+            <div class="stat-card purple">
+
+                <div class="stat-top">
+
+                    <div class="stat-label">
+                        Customers
+                    </div>
+
+                    <div class="stat-icon purple">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="8"
+                                r="3"
+                            />
+
+                            <path
+                                d="M5 21c0-3.5 3.1-6 7-6s7 2.5 7 6"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-value">
+                    {{ total_customers|default:"0" }}
+                </div>
+
+
+                <div class="stat-description">
+                    Registered customers
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             DASHBOARD GRID
+        ================================================== -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- =================================================
+                 RECENT RESERVATIONS
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+                        Recent Reservations
+                    </div>
+
+                    <a
+                        href="{% url 'reservation_list' %}"
+                        class="view-all"
+                    >
+                        View all
+                    </a>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Reservation
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for reservation in recent_reservations %}
+
+                            <tr>
+
+                                <!-- CUSTOMER -->
+
+                                <td>
+
+                                    <div class="reservation-name">
+
+                                        {{ reservation.customer.username }}
+
+                                    </div>
+
+                                    <div class="reservation-date">
+
+                                        {{ reservation.customer.email }}
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- RESERVATION -->
+
+                                <td>
+
+                                    <div class="reservation-name">
+
+                                        {{ reservation.room.name }}
+
+                                    </div>
+
+                                    <div class="reservation-date">
+
+                                        {{ reservation.check_in|date:"M d, Y" }}
+
+                                        -
+
+                                        {{ reservation.check_out|date:"M d, Y" }}
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- STATUS -->
+
+                                <td>
+
+                                    {% if reservation.status == "CONFIRMED" %}
+
+                                        <span class="status confirmed">
+                                            Confirmed
+                                        </span>
+
+                                    {% elif reservation.status == "PENDING" %}
+
+                                        <span class="status pending">
+                                            Pending
+                                        </span>
+
+                                    {% elif reservation.status == "CANCELLED" %}
+
+                                        <span class="status cancelled">
+                                            Cancelled
+                                        </span>
+
+                                    {% elif reservation.status == "COMPLETED" %}
+
+                                        <span class="status completed">
+                                            Completed
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status cancelled">
+                                            {{ reservation.status }}
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+
+                                <td
+                                    colspan="3"
+                                    class="empty-state"
+                                >
+                                    No reservations yet.
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 QUICK ACTIONS
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+                        Quick Actions
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+
+                    <!-- RESERVATIONS -->
+
+                    <a
+                        href="{% url 'reservation_list' %}"
+                        class="action"
+                    >
+
+                        <div class="action-icon blue">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
                             >
 
-                                No reservations yet.
+                                <rect
+                                    x="3"
+                                    y="4"
+                                    width="18"
+                                    height="17"
+                                    rx="2"
+                                />
 
-                            </td>
+                                <line
+                                    x1="8"
+                                    y1="2"
+                                    x2="8"
+                                    y2="6"
+                                />
 
-                        </tr>
+                                <line
+                                    x1="16"
+                                    y1="2"
+                                    x2="16"
+                                    y2="6"
+                                />
 
-                        {% endfor %}
+                                <line
+                                    x1="3"
+                                    y1="9"
+                                    x2="21"
+                                    y2="9"
+                                />
 
-                    </tbody>
+                                <line
+                                    x1="12"
+                                    y1="12"
+                                    x2="12"
+                                    y2="18"
+                                />
 
-                </table>
+                                <line
+                                    x1="9"
+                                    y1="15"
+                                    x2="15"
+                                    y2="15"
+                                />
 
-            </div>
+                            </svg>
 
-        </div>
+                        </div>
 
 
-        <!-- =================================================
-             QUICK ACTIONS
-        ================================================== -->
+                        <div>
 
-        <div class="card">
+                            <div class="action-title">
+                                Reservations
+                            </div>
 
-            <div class="card-header">
+                            <div class="action-description">
+                                Manage customer reservations
+                            </div>
 
-                <div class="card-title">
-                    Quick Actions
+                        </div>
+
+                    </a>
+
+
+                    <!-- ROOMS -->
+
+                    <a
+                        href="{% url 'room_list' %}"
+                        class="action"
+                    >
+
+                        <div class="action-icon green">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M3 21V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16"
+                                />
+
+                                <path
+                                    d="M3 21h18"
+                                />
+
+                                <path
+                                    d="M7 7h3"
+                                />
+
+                                <path
+                                    d="M14 7h3"
+                                />
+
+                                <path
+                                    d="M7 11h3"
+                                />
+
+                                <path
+                                    d="M14 11h3"
+                                />
+
+                                <path
+                                    d="M9 21v-6h6v6"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="action-title">
+                                Manage Rooms
+                            </div>
+
+                            <div class="action-description">
+                                Add or edit rooms
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- PAYMENTS -->
+
+                    <a
+                        href="{% url 'payment_list' %}"
+                        class="action"
+                    >
+
+                        <div class="action-icon orange">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <rect
+                                    x="3"
+                                    y="5"
+                                    width="18"
+                                    height="14"
+                                    rx="2"
+                                />
+
+                                <line
+                                    x1="3"
+                                    y1="10"
+                                    x2="21"
+                                    y2="10"
+                                />
+
+                                <line
+                                    x1="7"
+                                    y1="15"
+                                    x2="11"
+                                    y2="15"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="action-title">
+                                Payments
+                            </div>
+
+                            <div class="action-description">
+                                Review payment receipts
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- CUSTOMERS -->
+
+                    <a
+                        href="{% url 'customer_list' %}"
+                        class="action"
+                    >
+
+                        <div class="action-icon purple">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <circle
+                                    cx="9"
+                                    cy="8"
+                                    r="3"
+                                />
+
+                                <path
+                                    d="M3 21c0-3.5 2.7-6 6-6s6 2.5 6 6"
+                                />
+
+                                <path
+                                    d="M16 5.5a3 3 0 0 1 0 5.5"
+                                />
+
+                                <path
+                                    d="M18 15c2 .7 3 2.5 3 6"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="action-title">
+                                Customers
+                            </div>
+
+                            <div class="action-description">
+                                View registered customers
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- REPORTS -->
+
+                    <a
+                        href="{% url 'reports' %}"
+                        class="action"
+                    >
+
+                        <div class="action-icon slate">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M4 20V10"
+                                />
+
+                                <path
+                                    d="M10 20V4"
+                                />
+
+                                <path
+                                    d="M16 20v-7"
+                                />
+
+                                <path
+                                    d="M22 20H2"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="action-title">
+                                Reports
+                            </div>
+
+                            <div class="action-description">
+                                View reservation reports
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
                 </div>
 
             </div>
 
 
-            <div class="actions">
-
-
-                <!-- RESERVATIONS -->
-
-                <a
-                    href="{% url 'reservation_list' %}"
-                    class="action"
-                >
-
-                    <div class="action-icon">
-                        +
-                    </div>
-
-                    <div>
-
-                        <div class="action-title">
-                            Reservations
-                        </div>
-
-                        <div class="action-description">
-                            Manage customer reservations
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- ROOMS -->
-
-                <a
-                    href="{% url 'room_list' %}"
-                    class="action"
-                >
-
-                    <div class="action-icon">
-                        ▣
-                    </div>
-
-                    <div>
-
-                        <div class="action-title">
-                            Manage Rooms
-                        </div>
-
-                        <div class="action-description">
-                            Add or edit rooms
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- PAYMENTS -->
-
-                <a
-                    href="{% url 'payment_list' %}"
-                    class="action"
-                >
-
-                    <div class="action-icon">
-                        ₱
-                    </div>
-
-                    <div>
-
-                        <div class="action-title">
-                            Payments
-                        </div>
-
-                        <div class="action-description">
-                            Review payment receipts
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- CUSTOMERS -->
-
-                <a
-                    href="{% url 'customer_list' %}"
-                    class="action"
-                >
-
-                    <div class="action-icon">
-                        ♙
-                    </div>
-
-                    <div>
-
-                        <div class="action-title">
-                            Customers
-                        </div>
-
-                        <div class="action-description">
-                            View registered customers
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- REPORTS -->
-
-                <a
-                    href="{% url 'reports' %}"
-                    class="action"
-                >
-
-                    <div class="action-icon">
-                        ▥
-                    </div>
-
-                    <div>
-
-                        <div class="action-title">
-                            Reports
-                        </div>
-
-                        <div class="action-description">
-                            View reservation reports
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-            </div>
-
         </div>
 
 
-    </div>
-
-
-</section>
+    </section>
 
 
 </div>

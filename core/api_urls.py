@@ -11,6 +11,9 @@ from .api_views import (
     reservation_detail,
     user_profile,
     ai_assistant,
+    resort_map_rooms,
+    my_reservation_map
+
     
 )
 
@@ -93,5 +96,15 @@ urlpatterns = [
     "ai-assistant/",
     ai_assistant,
     name="ai_assistant"
+    ),
+    path(
+        "resort-map/rooms/",
+        resort_map_rooms,
+        name="resort-map-rooms"
+    ),
+        path(
+        "my-reservation-map/",
+        my_reservation_map,
+        name="my_reservation_map"
     ),
 ]
